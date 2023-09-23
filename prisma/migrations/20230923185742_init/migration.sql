@@ -1,0 +1,23 @@
+-- CreateTable
+CREATE TABLE "Day" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "date" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Exercise" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "type" TEXT NOT NULL,
+    "time" INTEGER NOT NULL,
+    "dayId" INTEGER NOT NULL,
+    CONSTRAINT "Exercise_dayId_fkey" FOREIGN KEY ("dayId") REFERENCES "Day" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Food" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "type" TEXT NOT NULL,
+    "calories" INTEGER NOT NULL,
+    "dayId" INTEGER NOT NULL,
+    CONSTRAINT "Food_dayId_fkey" FOREIGN KEY ("dayId") REFERENCES "Day" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);

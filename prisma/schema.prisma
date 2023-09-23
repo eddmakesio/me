@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Day {
+    id          Int         @id @default(autoincrement())
+    date        String      @unique
+    exercices   Exercise[]
+    meals       Food[]
+}
+
+model Exercise {
+    id          Int         @id @default(autoincrement())
+    type        String
+    time        Int
+    day         Day         @relation(fields: [dayId], references: [id])
+    dayId       Int
+}
+
+model Food {
+    id          Int         @id @default(autoincrement())
+    type        String
+    calories    Int
+    day         Day         @relation(fields: [dayId], references: [id])
+    dayId       Int
+}
